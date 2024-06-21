@@ -20,23 +20,22 @@ function App() {
       setImage(imageResponse.data.image);
 
       const storyResponse = await axios.post(
-        "https://api.openai.com/v1/chat/completions",
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=?key=AIzaSyCEm6EGU_ODQVRpJ96Gbk9LBUBlni4r25g",
         {
-          model: "gpt-3.5-turbo",
-          messages: [
+          contents: [
             {
-              role: "user",
-              content: `Somos una herramienta que permite ver si dos emprendedores hacen match o no para ser cofounders de una startup. Crea una historia graciosa en español de por qué ${person1} y ${person2} ${
-                imageResponse.data.answer === "yes" ? "" : "not"
-              } deberian estar juntos. Que no sea de mas de 100 palabras.`,
+              parts: [
+                {
+                  text: `Somos una herramienta que permite ver si dos emprendedores hacen match o no para ser cofounders de una startup. Crea una historia graciosa en español de por qué ${person1} y ${person2} ${
+                    imageResponse.data.answer === "yes" ? "" : "not"
+                  } deberian estar juntos. Que no sea de mas de 100 palabras.`,
+                },
+              ],
             },
           ],
-          temperature: 1,
-          max_tokens: 100,
         },
         {
           headers: {
-            Authorization: `Bearer ` + apiKey,
             "Content-Type": "application/json",
           },
         }
