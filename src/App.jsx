@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
-const apiKey = process.env.REACT_APP_API_KEY;
 
 function App() {
   const [person1, setPerson1] = useState("");
@@ -10,6 +9,7 @@ function App() {
   const [story, setStory] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const apiKey = import.meta.env.VITE_API_KEY;
 
   const fetchMatchResult = async () => {
     setLoading(true);
