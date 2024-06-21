@@ -120,8 +120,8 @@ function App() {
         </button>
       </form>
       {error && <p className="error">{error}</p>}
-      {image && <img src={image} alt="Match Result" />}
       {story && <p className="story">{story}</p>}
+      {image && <img src={image} alt="Match Result" />}
     </div>
   );
 }
