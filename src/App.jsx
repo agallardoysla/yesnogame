@@ -152,6 +152,18 @@ function App() {
       {error && <p className="error">{error}</p>}
       {story && <p className="story">{story}</p>}
       {image && <img src={image} alt="Match Result" />}
+      <footer>
+        <p>
+          Powered by{" "}
+          <a
+            href="https://www.linkedin.com/in/andres-gallardo-ysla/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Andres Gallardo
+          </a>
+        </p>
+      </footer>
     </div>
   );
 }
