@@ -19,29 +19,60 @@ function App() {
       const imageResponse = await axios.get("https://yesno.wtf/api");
       setImage(imageResponse.data.image);
 
-      const storyResponse = await axios.post(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=?key=AIzaSyCEm6EGU_ODQVRpJ96Gbk9LBUBlni4r25g",
-        {
-          contents: [
-            {
-              parts: [
-                {
-                  text: `Somos una herramienta que permite ver si dos emprendedores hacen match o no para ser cofounders de una startup. Crea una historia graciosa en español de por qué ${person1} y ${person2} ${
-                    imageResponse.data.answer === "yes" ? "" : "not"
-                  } deberian estar juntos. Que no sea de mas de 100 palabras.`,
-                },
-              ],
-            },
-          ],
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
+      // const storyResponse = await axios.post(
+      //   "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=?key=AIzaSyCEm6EGU_ODQVRpJ96Gbk9LBUBlni4r25g",
+      //   JSON.stringify({
+      //     contents: [
+      //       {
+      //         parts: [
+      //           {
+      //             text: `Somos una herramienta que permite ver si dos emprendedores hacen match o no para ser cofounders de una startup. Crea una historia graciosa en español de por qué ${person1} y ${person2} ${
+      //               imageResponse.data.answer === "yes" ? "" : "not"
+      //             } deberian estar juntos. Que no sea de mas de 100 palabras.`,
+      //           },
+      //         ],
+      //       },
+      //     ],
+      //   }),
+      //   {
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //   }
+      // );
+
+      const myHeaders = new Headers();
+      myHeaders.append("content-type", "application/json");
+
+      const raw = JSON.stringify({
+        contents: [
+          {
+            parts: [
+              {
+                text: `Somos una herramienta que permite ver si dos emprendedores hacen match o no para ser cofounders de una startup. Crea una historia graciosa en español de por qué ${person1} y ${person2} ${
+                  imageResponse.data.answer === "yes" ? "" : "not"
+                } deberian estar juntos. Que no sea de mas de 100 palabras.`,
+              },
+            ],
           },
-        }
+        ],
+      });
+
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      const storyResponse = await fetch(
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyCEm6EGU_ODQVRpJ96Gbk9LBUBlni4r25g",
+        requestOptions
       );
 
-      setStory(storyResponse.data.choices[0].message.content);
+      const storyResponseJson = await storyResponse.json();
+
+      setStory(storyResponseJson.candidates[0].content.parts[0].text);
     } catch (err) {
       setError("Error fetching the data");
     } finally {
