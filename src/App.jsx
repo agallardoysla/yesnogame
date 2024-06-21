@@ -163,6 +163,7 @@ function App() {
             Andres Gallardo
           </a>
         </p>
+        <p style={{ fontWeight: "bold" }}>One Hour Challenge</p>
       </footer>
     </div>
   );
