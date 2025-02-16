@@ -66,7 +66,7 @@ function App() {
       };
 
       const storyResponse = await fetch(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyCEm6EGU_ODQVRpJ96Gbk9LBUBlni4r25g",
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyCKfLQRWD61TN_vc5LaZnFknqgXUfk7oN4",
         requestOptions
       );
 
